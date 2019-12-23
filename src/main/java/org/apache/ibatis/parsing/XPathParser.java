@@ -227,6 +227,12 @@ public class XPathParser {
     }
   }
 
+  /**
+   * 解析 xml 文档结构（dom 解析）
+   *
+   * @param inputSource
+   * @return
+   */
   private Document createDocument(InputSource inputSource) {
     // important: this must only be called AFTER common constructor
     try {
@@ -264,6 +270,13 @@ public class XPathParser {
     }
   }
 
+  /**
+   * 私有的构造方法
+   *
+   * @param validation
+   * @param variables
+   * @param entityResolver
+   */
   private void commonConstructor(boolean validation, Properties variables, EntityResolver entityResolver) {
     this.validation = validation;
     this.entityResolver = entityResolver;

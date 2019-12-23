@@ -16,12 +16,25 @@
 package org.apache.ibatis.parsing;
 
 /**
+ * 通用 token 解析处理器
+ *
  * @author Clinton Begin
  */
 public class GenericTokenParser {
 
+  /**
+   * 占位符的开始标识
+   */
   private final String openToken;
+
+  /**
+   * 占位符的结束标识
+   */
   private final String closeToken;
+
+  /**
+   * 占位符内容 Handler
+   */
   private final TokenHandler handler;
 
   public GenericTokenParser(String openToken, String closeToken, TokenHandler handler) {
@@ -30,11 +43,17 @@ public class GenericTokenParser {
     this.handler = handler;
   }
 
+  /**
+   * 占位符解析
+   *
+   * @param text
+   * @return
+   */
   public String parse(String text) {
     if (text == null || text.isEmpty()) {
       return "";
     }
-    // search open token
+    // 判断字符是否包含开始字符 '{'
     int start = text.indexOf(openToken);
     if (start == -1) {
       return text;

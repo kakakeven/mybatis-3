@@ -16,6 +16,8 @@
 package org.apache.ibatis.exceptions;
 
 /**
+ * MyBatis 执行异常
+ *
  * @author Clinton Begin
  */
 @Deprecated
