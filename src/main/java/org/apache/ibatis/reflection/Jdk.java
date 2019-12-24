@@ -18,6 +18,8 @@ package org.apache.ibatis.reflection;
 import org.apache.ibatis.io.Resources;
 
 /**
+ * 检查依赖的类是否存在：Clock、Optional、Parameter
+ *
  * To check the existence of version dependent classes.
  */
 public class Jdk {

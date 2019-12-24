@@ -14,6 +14,8 @@
  *    limitations under the License.
  */
 /**
+ * Commons Logging 日志实现
+ *
  * logger using Commons Logging feature.
  */
 package org.apache.ibatis.logging.commons;

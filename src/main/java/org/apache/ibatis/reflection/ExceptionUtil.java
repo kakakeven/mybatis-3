@@ -19,6 +19,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.UndeclaredThrowableException;
 
 /**
+ * 异常工具类
+ *
  * @author Clinton Begin
  */
 public class ExceptionUtil {
@@ -27,6 +29,13 @@ public class ExceptionUtil {
     // Prevent Instantiation
   }
 
+
+  /**
+   * 获取原始异常
+   *
+   * @param wrapped
+   * @return
+   */
   public static Throwable unwrapThrowable(Throwable wrapped) {
     Throwable unwrapped = wrapped;
     while (true) {

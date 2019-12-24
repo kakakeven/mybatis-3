@@ -14,6 +14,8 @@
  *    limitations under the License.
  */
 /**
+ * JDK Logger 实现
+ *
  * logger using JDK logging feature.
  */
 package org.apache.ibatis.logging.jdk14;
