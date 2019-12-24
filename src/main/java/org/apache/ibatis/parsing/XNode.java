@@ -27,15 +27,37 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
+ * XML 节点对象-对 XML Node 节点的封装
+ *
  * @author Clinton Begin
  */
 public class XNode {
 
+  /**
+   * 当前节点
+   */
   private final Node node;
+  /**
+   * 节点名称
+   */
   private final String name;
+
+  /**
+   * 节点内容
+   */
   private final String body;
+
+  /**
+   * 节点属性
+   */
   private final Properties attributes;
+  /**
+   * 参数变量
+   */
   private final Properties variables;
+  /**
+   * XPath 解析器
+   */
   private final XPathParser xpathParser;
 
   public XNode(XPathParser xpathParser, Node node, Properties variables) {
@@ -51,6 +73,10 @@ public class XNode {
     return new XNode(xpathParser, node, variables);
   }
 
+  /**
+   * 获取当前 Xnode 的父节点
+   * @return
+   */
   public XNode getParent() {
     Node parent = node.getParentNode();
     if (!(parent instanceof Element)) {
@@ -60,6 +86,11 @@ public class XNode {
     }
   }
 
+  /**
+   * 获取节点路径 root/student/name 这样子
+   *
+   * @return
+   */
   public String getPath() {
     StringBuilder builder = new StringBuilder();
     Node current = node;
@@ -73,6 +104,11 @@ public class XNode {
     return builder.toString();
   }
 
+  /**
+   * 获取值的标识符，类似 book[hello][world] 这样
+   *
+   * @return
+   */
   public String getValueBasedIdentifier() {
     StringBuilder builder = new StringBuilder();
     XNode current = this;
@@ -96,6 +132,12 @@ public class XNode {
     return builder.toString();
   }
 
+  /**
+   * Xpath 语法获取节点值
+   *
+   * @param expression
+   * @return
+   */
   public String evalString(String expression) {
     return xpathParser.evalString(node, expression);
   }
@@ -196,10 +238,21 @@ public class XNode {
     }
   }
 
+  /* 获取属性值 Begin */
+
   public <T extends Enum<T>> T getEnumAttribute(Class<T> enumType, String name) {
     return getEnumAttribute(enumType, name, null);
   }
 
+  /**
+   * 获取枚举属性
+   *
+   * @param enumType
+   * @param name
+   * @param def
+   * @param <T>
+   * @return
+   */
   public <T extends Enum<T>> T getEnumAttribute(Class<T> enumType, String name, T def) {
     String value = getStringAttribute(name);
     if (value == null) {
@@ -287,6 +340,13 @@ public class XNode {
     }
   }
 
+  /* 获取属性值 End */
+
+  /**
+   * 获取子节点
+   *
+   * @return
+   */
   public List<XNode> getChildren() {
     List<XNode> children = new ArrayList<>();
     NodeList nodeList = node.getChildNodes();
@@ -301,6 +361,11 @@ public class XNode {
     return children;
   }
 
+  /**
+   * 将子节点的 name、value 解析为属性键值对
+   *
+   * @return
+   */
   public Properties getChildrenAsProperties() {
     Properties properties = new Properties();
     for (XNode child : getChildren()) {
@@ -320,6 +385,12 @@ public class XNode {
     return builder.toString();
   }
 
+  /**
+   * 以 XML 的格式输出
+   *
+   * @param builder
+   * @param level
+   */
   private void toString(StringBuilder builder, int level) {
     builder.append("<");
     builder.append(name);
@@ -354,12 +425,24 @@ public class XNode {
     builder.append("\n");
   }
 
+  /**
+   * 缩进四个空格
+   *
+   * @param builder
+   * @param level
+   */
   private void indent(StringBuilder builder, int level) {
     for (int i = 0; i < level; i++) {
       builder.append("    ");
     }
   }
 
+  /**
+   * 解析属性值
+   *
+   * @param n
+   * @return
+   */
   private Properties parseAttributes(Node n) {
     Properties attributes = new Properties();
     NamedNodeMap attributeNodes = n.getAttributes();
@@ -373,6 +456,12 @@ public class XNode {
     return attributes;
   }
 
+  /**
+   * 获取节点的内容
+   *
+   * @param node
+   * @return
+   */
   private String parseBody(Node node) {
     String data = getBodyData(node);
     if (data == null) {
@@ -388,6 +477,12 @@ public class XNode {
     return data;
   }
 
+  /**
+   * 获取节点参数值，会进行参数替换
+   *
+   * @param child
+   * @return
+   */
   private String getBodyData(Node child) {
     if (child.getNodeType() == Node.CDATA_SECTION_NODE
         || child.getNodeType() == Node.TEXT_NODE) {

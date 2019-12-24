@@ -41,15 +41,30 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
+ * 文档解析器
+ *
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */
 public class XPathParser {
 
+  /**
+   * 待解析的 XML 文档
+   */
   private final Document document;
+  /**
+   * 是否校验
+   */
   private boolean validation;
+
   private EntityResolver entityResolver;
+  /**
+   * 属性值
+   */
   private Properties variables;
+  /**
+   * Xpath 解析器
+   */
   private XPath xpath;
 
   public XPathParser(String xml) {
@@ -229,6 +244,7 @@ public class XPathParser {
 
   /**
    * 解析 xml 文档结构（dom 解析）
+   * 依赖于 entityResolver 的创建
    *
    * @param inputSource
    * @return
@@ -281,6 +297,7 @@ public class XPathParser {
     this.validation = validation;
     this.entityResolver = entityResolver;
     this.variables = variables;
+    // 初始化 Xpath
     XPathFactory factory = XPathFactory.newInstance();
     this.xpath = factory.newXPath();
   }
