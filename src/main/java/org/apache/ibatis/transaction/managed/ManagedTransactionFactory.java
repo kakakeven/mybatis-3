@@ -35,6 +35,11 @@ public class ManagedTransactionFactory implements TransactionFactory {
 
   private boolean closeConnection = true;
 
+  /**
+   * 设置事务属性，可以控制是否关闭数据库连接
+   *
+   * @param props
+   */
   @Override
   public void setProperties(Properties props) {
     if (props != null) {

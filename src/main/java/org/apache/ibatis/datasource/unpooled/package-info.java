@@ -14,6 +14,8 @@
  *    limitations under the License.
  */
 /**
+ * 简单的数据源实现
+ *
  * Hyper-simple Datasource.
  */
 package org.apache.ibatis.datasource.unpooled;

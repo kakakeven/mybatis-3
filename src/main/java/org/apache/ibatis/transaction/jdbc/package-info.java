@@ -14,6 +14,7 @@
  *    limitations under the License.
  */
 /**
- * JDBC transaction.
+ * JDBC 数据库事务封装实现，默认会调用 JDBC 的数据库链接进行事务控制
+ *
  */
 package org.apache.ibatis.transaction.jdbc;
