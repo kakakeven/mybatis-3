@@ -21,10 +21,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * 参数类型 Handler
+ *
  * @author Clinton Begin
  */
 public interface TypeHandler<T> {
 
+  /**
+   * 设置参数-将类型为 T 的 parameter，转化成所需的 jdbcType
+   *
+   * @param ps
+   * @param i
+   * @param parameter
+   * @param jdbcType
+   * @throws SQLException
+   */
   void setParameter(PreparedStatement ps, int i, T parameter, JdbcType jdbcType) throws SQLException;
 
   /**
