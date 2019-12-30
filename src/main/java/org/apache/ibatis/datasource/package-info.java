@@ -14,6 +14,8 @@
  *    limitations under the License.
  */
 /**
+ * 数据源
+ *
  * Base package for Datasources
  */
 package org.apache.ibatis.datasource;

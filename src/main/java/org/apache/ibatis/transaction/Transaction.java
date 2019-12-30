@@ -19,6 +19,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
+ * 包装一个数据库连接，处理数据库连接的生命周期:
+ * 包括：创建、准备、提交、回滚和关闭
+ *
  * Wraps a database connection.
  * Handles the connection lifecycle that comprises: its creation, preparation, commit/rollback and close.
  *
@@ -27,31 +30,41 @@ import java.sql.SQLException;
 public interface Transaction {
 
   /**
+   * 返回包装的数据库连接
    * Retrieve inner database connection.
+   *
    * @return DataBase connection
    * @throws SQLException
    */
   Connection getConnection() throws SQLException;
 
   /**
+   * 提交事务，如果 autoCommit 为 true，本操作无效
+   *
    * Commit inner database connection.
    * @throws SQLException
    */
   void commit() throws SQLException;
 
   /**
+   * 回滚事务，如果 autoCommit 为 true，本操作无效
+   *
    * Rollback inner database connection.
    * @throws SQLException
    */
   void rollback() throws SQLException;
 
   /**
+   * 关闭数据库连接
+   *
    * Close inner database connection.
    * @throws SQLException
    */
   void close() throws SQLException;
 
   /**
+   * 获取事务超时时间
+   *
    * Get transaction timeout if set.
    * @throws SQLException
    */

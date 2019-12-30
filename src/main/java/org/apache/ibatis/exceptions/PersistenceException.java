@@ -16,6 +16,8 @@
 package org.apache.ibatis.exceptions;
 
 /**
+ * 持久化异常基类
+ *
  * @author Clinton Begin
  */
 @SuppressWarnings("deprecation")

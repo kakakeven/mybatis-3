@@ -26,6 +26,10 @@ import org.apache.ibatis.transaction.Transaction;
 import org.apache.ibatis.transaction.TransactionException;
 
 /**
+ * 直接使用 JDBC 的 commit/rollback 操作,依赖于数据源返回的连接来管理事务的范围.
+ * 在 getConnection() 方法调用之前，延迟创建 Connection 数据库连接；
+ * 如果自动提交设置为 true，commit、rollback 方法会被忽略
+ *
  * {@link Transaction} that makes use of the JDBC commit and rollback facilities directly.
  * It relies on the connection retrieved from the dataSource to manage the scope of the transaction.
  * Delays connection retrieval until getConnection() is called.
@@ -82,6 +86,11 @@ public class JdbcTransaction implements Transaction {
     }
   }
 
+  /**
+   * 事务的关闭，会同时关闭数据库连接
+   *
+   * @throws SQLException
+   */
   @Override
   public void close() throws SQLException {
     if (connection != null) {
@@ -93,6 +102,11 @@ public class JdbcTransaction implements Transaction {
     }
   }
 
+  /**
+   * 设置事务是否自动提交，如果数据库驱动不支持会抛出 TransactionException
+   *
+   * @param desiredAutoCommit
+   */
   protected void setDesiredAutoCommit(boolean desiredAutoCommit) {
     try {
       if (connection.getAutoCommit() != desiredAutoCommit) {
@@ -110,9 +124,14 @@ public class JdbcTransaction implements Transaction {
     }
   }
 
+  /**
+   * 设置数据库连接自动提交为 true
+   */
   protected void resetAutoCommit() {
     try {
       if (!connection.getAutoCommit()) {
+        // MyBatis 对于 Select 语句不会执行事务操作，有些数据库对 select 语句也会开启事务，并且在关闭连接之前，强制执行 commit/rollback 操作；
+        // 解决办法是在关闭之前将 autoCommit 设置为 true
         // MyBatis does not call commit/rollback on a connection if just selects were performed.
         // Some databases start transactions with select statements
         // and they mandate a commit/rollback before closing the connection.
@@ -131,6 +150,11 @@ public class JdbcTransaction implements Transaction {
     }
   }
 
+  /**
+   * 开启数据库连接
+   *
+   * @throws SQLException
+   */
   protected void openConnection() throws SQLException {
     if (log.isDebugEnabled()) {
       log.debug("Opening JDBC Connection");

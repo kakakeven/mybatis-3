@@ -38,8 +38,19 @@ import org.apache.ibatis.io.Resources;
  */
 public class UnpooledDataSource implements DataSource {
 
+  /**
+   * 数据驱动类加载器
+   */
   private ClassLoader driverClassLoader;
+
+  /**
+   * 数据驱动参数
+   */
   private Properties driverProperties;
+
+  /**
+   * 保存 registered 的数据驱动对应关系
+   */
   private static Map<String, Driver> registeredDrivers = new ConcurrentHashMap<>();
 
   private String driver;
@@ -51,6 +62,10 @@ public class UnpooledDataSource implements DataSource {
   private Integer defaultTransactionIsolationLevel;
   private Integer defaultNetworkTimeout;
 
+  /**
+   * 将 DriverManager 中注册的数据库驱动，Copy 一份到 registeredDrivers 映射中
+   * key 值为驱动的 className
+   */
   static {
     Enumeration<Driver> drivers = DriverManager.getDrivers();
     while (drivers.hasMoreElements()) {
