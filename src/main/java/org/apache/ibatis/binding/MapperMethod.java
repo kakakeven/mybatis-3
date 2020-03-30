@@ -219,6 +219,10 @@ public class MapperMethod {
   public static class SqlCommand {
 
     private final String name;
+
+    /**
+     * SQL 命令类型
+     */
     private final SqlCommandType type;
 
     public SqlCommand(Configuration configuration, Class<?> mapperInterface, Method method) {
@@ -272,6 +276,9 @@ public class MapperMethod {
     }
   }
 
+  /**
+   * 方法签名
+   */
   public static class MethodSignature {
 
     private final boolean returnsMany;
