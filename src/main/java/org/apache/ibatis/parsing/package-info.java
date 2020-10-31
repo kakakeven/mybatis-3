@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2015 the original author or authors.
+ *    Copyright 2009-2020 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -14,16 +14,6 @@
  *    limitations under the License.
  */
 /**
- * Parsing utils
- *
- * XML 配置解析模块
- *
- * <p>
- *   parsing 模块的依赖关系：
- *   1 XPathParser 对外提供服务，提供通用的构造方法；普通的值类型 boolean、integer 等都可以通过 eval* 方法获取；
- *   2 对于字符串的解析 XPathParser 通过调用 PropertyParser 来实现变量替换；
- *   3 PropertyParser 中默认使用 GenericTokenParser 来解析变量名，使用 TokenHandler 来处理变量；
- *   4 TokenHandler 的默认实现为 VariableTokenHandler;
- * </p>
+ * Parsing utils.
  */
 package org.apache.ibatis.parsing;

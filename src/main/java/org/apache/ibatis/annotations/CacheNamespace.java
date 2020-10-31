@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2019 the original author or authors.
+ *    Copyright 2009-2020 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -28,10 +28,11 @@ import org.apache.ibatis.cache.impl.PerpetualCache;
 /**
  * The annotation that specify to use cache on namespace(e.g. mapper interface).
  *
- * <p><br>
+ * <p>
  * <b>How to use:</b>
+ *
  * <pre>
- * &#064;acheNamespace(implementation = CustomCache.class, properties = {
+ * &#064;CacheNamespace(implementation = CustomCache.class, properties = {
  *   &#064;Property(name = "host", value = "${mybatis.cache.host}"),
  *   &#064;Property(name = "port", value = "${mybatis.cache.port}"),
  *   &#064;Property(name = "name", value = "usersCache")
@@ -40,6 +41,7 @@ import org.apache.ibatis.cache.impl.PerpetualCache;
  *   // ...
  * }
  * </pre>
+ *
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */
