@@ -21,6 +21,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * Byte 类型处理
+ *
  * @author Clinton Begin
  */
 public class ByteTypeHandler extends BaseTypeHandler<Byte> {

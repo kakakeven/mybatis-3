@@ -24,6 +24,8 @@ import java.sql.SQLException;
 
 /**
  * The {@link TypeHandler} for {@link Clob}/{@link Reader} using method supported at JDBC 4.0.
+ * Clob 和 Reader 类型转换处理
+ *
  * @since 3.4.0
  * @author Kazuki Shimizu
  */

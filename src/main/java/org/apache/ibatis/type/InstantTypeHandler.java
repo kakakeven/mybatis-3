@@ -23,6 +23,11 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 /**
+ * TimeStamp 和 Instant 的转换处理
+ *
+ * Instant --> Timestamp: Timestamp.from(instant);
+ * Timestamp --> Instant: timestamp.toInstant();
+ *
  * @since 3.4.5
  * @author Tomas Rohovsky
  */

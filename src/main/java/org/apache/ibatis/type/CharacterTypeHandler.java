@@ -21,6 +21,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * 字符的类型转换
+ *
  * @author Clinton Begin
  */
 public class CharacterTypeHandler extends BaseTypeHandler<Character> {
@@ -34,6 +36,7 @@ public class CharacterTypeHandler extends BaseTypeHandler<Character> {
   public Character getNullableResult(ResultSet rs, String columnName) throws SQLException {
     String columnValue = rs.getString(columnName);
     if (columnValue != null) {
+      // getString 来获取，取得后拿第一个字符
       return columnValue.charAt(0);
     } else {
       return null;

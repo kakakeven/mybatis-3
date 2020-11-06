@@ -23,6 +23,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * Byte[] 类型处理
+ *
  * @author Clinton Begin
  */
 public class BlobByteObjectArrayTypeHandler extends BaseTypeHandler<Byte[]> {
@@ -30,6 +32,7 @@ public class BlobByteObjectArrayTypeHandler extends BaseTypeHandler<Byte[]> {
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, Byte[] parameter, JdbcType jdbcType)
       throws SQLException {
+    // Byte[] -> byte[] --> ByteArrayInputStream
     ByteArrayInputStream bis = new ByteArrayInputStream(ByteArrayUtils.convertToPrimitiveArray(parameter));
     ps.setBinaryStream(i, bis, parameter.length);
   }
@@ -55,6 +58,13 @@ public class BlobByteObjectArrayTypeHandler extends BaseTypeHandler<Byte[]> {
     return getBytes(blob);
   }
 
+  /**
+   * 获取 Blob 字节流
+   *
+   * @param blob
+   * @return
+   * @throws SQLException
+   */
   private Byte[] getBytes(Blob blob) throws SQLException {
     Byte[] returnValue = null;
     if (blob != null) {

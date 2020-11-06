@@ -23,6 +23,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 /**
+ * 日期类型处理
+ * 数据库类型 timestamp，使用 java 的 Date 类型来接收
+ *
  * @author Clinton Begin
  */
 public class DateTypeHandler extends BaseTypeHandler<Date> {

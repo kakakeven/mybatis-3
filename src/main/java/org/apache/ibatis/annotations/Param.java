@@ -36,9 +36,9 @@ import java.lang.annotation.Target;
  *
  * @author Clinton Begin
  */
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.PARAMETER)
+@Documented // 元注解，表明该注解会保留在 API 文档中
+@Retention(RetentionPolicy.RUNTIME) // 表明该注解会保留到运行阶段
+@Target(ElementType.PARAMETER) // 表明注解可以应用在参数上
 public @interface Param {
   /**
    * Returns the parameter name.

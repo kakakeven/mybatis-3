@@ -48,8 +48,9 @@ import org.apache.ibatis.reflection.property.PropertyNamer;
  * @author Clinton Begin
  */
 public class Reflector {
-
+  // 要被反射解析的类
   private final Class<?> type;
+  // 能够读的属性列表
   private final String[] readablePropertyNames;
   private final String[] writablePropertyNames;
   private final Map<String, Invoker> setMethods = new HashMap<>();

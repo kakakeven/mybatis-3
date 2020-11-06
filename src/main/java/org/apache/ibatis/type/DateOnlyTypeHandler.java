@@ -22,10 +22,20 @@ import java.sql.SQLException;
 import java.util.Date;
 
 /**
+ * Sql Date <--> Java Date 类型处理
+ *
  * @author Clinton Begin
  */
 public class DateOnlyTypeHandler extends BaseTypeHandler<Date> {
 
+  /**
+   * 设置的时候带了时分秒，最终还是转为了 sql 的 Date 类型
+   * @param ps
+   * @param i
+   * @param parameter
+   * @param jdbcType
+   * @throws SQLException
+   */
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, Date parameter, JdbcType jdbcType)
       throws SQLException {

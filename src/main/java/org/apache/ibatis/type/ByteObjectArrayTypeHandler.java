@@ -21,6 +21,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * Java: Byte[] 数组 <--> JDBC: Byte[]
+ *
  * @author Clinton Begin
  */
 public class ByteObjectArrayTypeHandler extends BaseTypeHandler<Byte[]> {

@@ -23,6 +23,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * BigInteger 是按照 BigDecimal 来处理的
+ *
  * @author Paul Krause
  */
 public class BigIntegerTypeHandler extends BaseTypeHandler<BigInteger> {

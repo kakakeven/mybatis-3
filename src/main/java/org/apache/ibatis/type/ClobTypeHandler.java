@@ -23,6 +23,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * Clob 和 String 类型处理
+ *
  * @author Clinton Begin
  */
 public class ClobTypeHandler extends BaseTypeHandler<String> {

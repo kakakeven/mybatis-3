@@ -21,6 +21,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * Float 类型转换
+ *
  * @author Clinton Begin
  */
 public class FloatTypeHandler extends BaseTypeHandler<Float> {

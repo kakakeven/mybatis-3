@@ -34,6 +34,8 @@ import java.util.Calendar;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * 数组类型处理 Handler
+ *
  * @author Clinton Begin
  */
 public class ArrayTypeHandler extends BaseTypeHandler<Object> {
@@ -81,6 +83,7 @@ public class ArrayTypeHandler extends BaseTypeHandler<Object> {
       throws SQLException {
     if (parameter instanceof Array) {
       // it's the user's responsibility to properly free() the Array instance
+      // 正确释放数组实例是用户的责任
       ps.setArray(i, (Array) parameter);
     } else {
       if (!parameter.getClass().isArray()) {
@@ -88,7 +91,9 @@ public class ArrayTypeHandler extends BaseTypeHandler<Object> {
             "ArrayType Handler requires SQL array or java array parameter and does not support type "
                 + parameter.getClass());
       }
+      // 获取数组元素类型
       Class<?> componentType = parameter.getClass().getComponentType();
+      // 获取数组元素对应的 jdbcType
       String arrayTypeName = resolveTypeName(componentType);
       Array array = ps.getConnection().createArrayOf(arrayTypeName, (Object[]) parameter);
       ps.setArray(i, array);

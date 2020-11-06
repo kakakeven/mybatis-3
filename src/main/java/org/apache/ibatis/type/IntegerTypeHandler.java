@@ -21,6 +21,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * Integer 类型处理
+ *
  * @author Clinton Begin
  */
 public class IntegerTypeHandler extends BaseTypeHandler<Integer> {

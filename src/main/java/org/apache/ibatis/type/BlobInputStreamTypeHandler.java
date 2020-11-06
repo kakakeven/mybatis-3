@@ -24,6 +24,8 @@ import java.sql.SQLException;
 
 /**
  * The {@link TypeHandler} for {@link Blob}/{@link InputStream} using method supported at JDBC 4.0.
+ * InputStream 和 Blob 类型的转换
+ *
  * @since 3.4.0
  * @author Kazuki Shimizu
  */

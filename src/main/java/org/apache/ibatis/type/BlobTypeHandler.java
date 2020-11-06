@@ -23,6 +23,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * 逻辑同 BlobByteObjectArrayTypeHandler，一个是 Byte 包装类型，一个是 byte 基本类型
+ *
  * @author Clinton Begin
  */
 public class BlobTypeHandler extends BaseTypeHandler<byte[]> {
