@@ -97,9 +97,16 @@ public final class LogFactory {
     }
   }
 
+  /**
+   * 设置日志实现
+   *
+   * @param implClass
+   */
   private static void setImplementation(Class<? extends Log> implClass) {
     try {
+      // 当前日志实现类的构造方法
       Constructor<? extends Log> candidate = implClass.getConstructor(String.class);
+      // 尝试生成日志实现类的实例
       Log log = candidate.newInstance(LogFactory.class.getName());
       if (log.isDebugEnabled()) {
         log.debug("Logging initialized using '" + implClass + "' adapter.");
