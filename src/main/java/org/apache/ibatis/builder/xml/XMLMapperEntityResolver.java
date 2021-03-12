@@ -58,6 +58,7 @@ public class XMLMapperEntityResolver implements EntityResolver {
       if (systemId != null) {
         String lowerCaseSystemId = systemId.toLowerCase(Locale.ENGLISH);
         if (lowerCaseSystemId.contains(MYBATIS_CONFIG_SYSTEM) || lowerCaseSystemId.contains(IBATIS_CONFIG_SYSTEM)) {
+          // 获取本地的配置文档
           return getInputSource(MYBATIS_CONFIG_DTD, publicId, systemId);
         } else if (lowerCaseSystemId.contains(MYBATIS_MAPPER_SYSTEM) || lowerCaseSystemId.contains(IBATIS_MAPPER_SYSTEM)) {
           return getInputSource(MYBATIS_MAPPER_DTD, publicId, systemId);

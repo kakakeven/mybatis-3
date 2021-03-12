@@ -22,6 +22,7 @@ import org.apache.ibatis.cache.Cache;
 
 /**
  * Lru (least recently used) cache decorator.
+ * LRU Cache 装饰者
  *
  * @author Clinton Begin
  */

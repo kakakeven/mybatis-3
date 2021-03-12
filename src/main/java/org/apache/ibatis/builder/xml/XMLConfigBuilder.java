@@ -54,6 +54,7 @@ import org.apache.ibatis.type.JdbcType;
 public class XMLConfigBuilder extends BaseBuilder {
 
   private boolean parsed;
+
   private final XPathParser parser;
   private String environment;
   private final ReflectorFactory localReflectorFactory = new DefaultReflectorFactory();

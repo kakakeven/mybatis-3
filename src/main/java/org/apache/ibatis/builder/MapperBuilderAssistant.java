@@ -173,43 +173,6 @@ public class MapperBuilderAssistant extends BaseBuilder {
         .build();
   }
 
-  public ResultMap addResultMap(
-      String id,
-      Class<?> type,
-      String extend,
-      Discriminator discriminator,
-      List<ResultMapping> resultMappings,
-      Boolean autoMapping) {
-    id = applyCurrentNamespace(id, false);
-    extend = applyCurrentNamespace(extend, true);
-
-    if (extend != null) {
-      if (!configuration.hasResultMap(extend)) {
-        throw new IncompleteElementException("Could not find a parent resultmap with id '" + extend + "'");
-      }
-      ResultMap resultMap = configuration.getResultMap(extend);
-      List<ResultMapping> extendedResultMappings = new ArrayList<>(resultMap.getResultMappings());
-      extendedResultMappings.removeAll(resultMappings);
-      // Remove parent constructor if this resultMap declares a constructor.
-      boolean declaresConstructor = false;
-      for (ResultMapping resultMapping : resultMappings) {
-        if (resultMapping.getFlags().contains(ResultFlag.CONSTRUCTOR)) {
-          declaresConstructor = true;
-          break;
-        }
-      }
-      if (declaresConstructor) {
-        extendedResultMappings.removeIf(resultMapping -> resultMapping.getFlags().contains(ResultFlag.CONSTRUCTOR));
-      }
-      resultMappings.addAll(extendedResultMappings);
-    }
-    ResultMap resultMap = new ResultMap.Builder(configuration, id, type, resultMappings, autoMapping)
-        .discriminator(discriminator)
-        .build();
-    configuration.addResultMap(resultMap);
-    return resultMap;
-  }
-
   public Discriminator buildDiscriminator(
       Class<?> resultType,
       String column,
@@ -239,6 +202,46 @@ public class MapperBuilderAssistant extends BaseBuilder {
       namespaceDiscriminatorMap.put(e.getKey(), resultMap);
     }
     return new Discriminator.Builder(configuration, resultMapping, namespaceDiscriminatorMap).build();
+  }
+
+  public ResultMap addResultMap(
+    String id,
+    Class<?> type,
+    String extend,
+    Discriminator discriminator,
+    List<ResultMapping> resultMappings,
+    Boolean autoMapping) {
+    id = applyCurrentNamespace(id, false);
+    extend = applyCurrentNamespace(extend, true);
+
+    if (extend != null) {
+      if (!configuration.hasResultMap(extend)) {
+        throw new IncompleteElementException("Could not find a parent resultmap with id '" + extend + "'");
+      }
+      // 获取父级的 ResultMap
+      ResultMap resultMap = configuration.getResultMap(extend);
+      // 获取父级的属性映射
+      List<ResultMapping> extendedResultMappings = new ArrayList<>(resultMap.getResultMappings());
+      extendedResultMappings.removeAll(resultMappings);
+      // Remove parent constructor if this resultMap declares a constructor.
+      // 如果当前 ResultMap 设置有构建起，则移除父级构建器
+      boolean declaresConstructor = false;
+      for (ResultMapping resultMapping : resultMappings) {
+        if (resultMapping.getFlags().contains(ResultFlag.CONSTRUCTOR)) {
+          declaresConstructor = true;
+          break;
+        }
+      }
+      if (declaresConstructor) {
+        extendedResultMappings.removeIf(resultMapping -> resultMapping.getFlags().contains(ResultFlag.CONSTRUCTOR));
+      }
+      resultMappings.addAll(extendedResultMappings);
+    }
+    ResultMap resultMap = new ResultMap.Builder(configuration, id, type, resultMappings, autoMapping)
+      .discriminator(discriminator)
+      .build();
+    configuration.addResultMap(resultMap);
+    return resultMap;
   }
 
   public MappedStatement addMappedStatement(
